@@ -19,6 +19,7 @@ Add the plugin to Vue in ```main.js/app.js```:
 // Require dependencies
 var Vue = require('vue');
 var VueInstantPage = require('vue-instant-page');
+
 // Tell Vue to use the plugin
 Vue.use(VueInstantPage);
 
@@ -49,7 +50,7 @@ Vue.use(VueInstantPage, {
 });
 ```
 
-## Big thanks to instant.page and (Alexandre Dieulot)[https://github.com/dieulot]
+## Big thanks to instant.page and Alexandre Dieulot
 I converted the instant.page script into a VueJS Plugin.
 
 To view the original JS source: <https://github.com/instantpage/instant.page>
