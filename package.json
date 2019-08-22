@@ -1,0 +1,18 @@
+{
+  "name": "vue-instant-page",
+  "version": "0.1.0",
+  "description": "Make your site’s pages instant with this Vue Plugin and improve your conversion rate.",
+  "author": "Pascal van Gemert <pascal@pascalvangemert.nl>",
+  "private": false,
+  "main": "src/vue-instant-page.js",
+  "license": "MIT",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pascalvgemert/vue-instant-page.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vue": "^2.0.0"
+  }
+}
