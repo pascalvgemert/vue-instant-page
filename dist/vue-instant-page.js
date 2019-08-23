@@ -263,4 +263,4 @@ exports.default = {
         prefetcher.removeAttribute('href');
     }
 };
-//# sourceMappingURL=VueInstantPage.js.map
+//# sourceMappingURL=vue-instant-page.js.map

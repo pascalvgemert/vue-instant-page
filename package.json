@@ -1,14 +1,14 @@
 {
   "name": "vue-instant-page",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Make your site’s pages instant with this Vue Plugin and improve your conversion rate.",
   "author": "Pascal van Gemert <pascal@pascalvangemert.nl>",
   "private": false,
-  "main": "src/vue-instant-page.js",
+  "main": "dist/vue-instant-page.min.js",
   "license": "MIT",
   "scripts": {
     "compile": "babel --source-maps -d dist/ src/",
-    "minify": "minify src/VueInstantPage.js > dist/VueInstantPage.min.js",
+    "minify": "minify src/vue-instant-page.js > dist/vue-instant-page.min.js",
     "prepublish": "npm run compile && npm run minify"
   },
   "repository": {
