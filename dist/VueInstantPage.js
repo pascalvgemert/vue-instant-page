@@ -1,8 +1,13 @@
-const prefetcher = document.createElement('link');
-const isSupported = prefetcher.relList && prefetcher.relList.supports && prefetcher.relList.supports('prefetch');
-const isDataSaverEnabled = navigator.connection && navigator.connection.saveData;
+'use strict';
 
-export default {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var prefetcher = document.createElement('link');
+var isSupported = prefetcher.relList && prefetcher.relList.supports && prefetcher.relList.supports('prefetch');
+var isDataSaverEnabled = navigator.connection && navigator.connection.saveData;
+
+exports.default = {
     lastTouchTimestamp: undefined,
     mouseoverTimer: undefined,
     urlToPreload: undefined,
@@ -24,7 +29,7 @@ export default {
         allowExternalLinks: false,
 
         /** Only preload specific links when use whitelist is set to true */
-        useWhitelist: false,
+        useWhitelist: false
     },
 
     /**
@@ -33,7 +38,7 @@ export default {
      * @param Vue
      * @param options
      */
-    install(Vue, options) {
+    install: function install(Vue, options) {
         // If prefetch is not support or data saver is enabled, do not run this plugin at all.
         if (!isSupported || isDataSaverEnabled) {
             return;
@@ -46,23 +51,25 @@ export default {
         this.initializeEventListeners();
     },
 
+
     /**
      * Build the prefetcher node
      */
-    buildPrefetcher() {
+    buildPrefetcher: function buildPrefetcher() {
         prefetcher.rel = 'prefetch';
 
         // Append prefetcher to head of the document
         document.head.appendChild(prefetcher);
     },
 
+
     /**
      * Set event listeners based on options
      */
-    initializeEventListeners() {
-        const eventListenersOptions = {
+    initializeEventListeners: function initializeEventListeners() {
+        var eventListenersOptions = {
             capture: true,
-            passive: true,
+            passive: true
         };
 
         if (!this.finalOptions.useMousedownOnly) {
@@ -76,17 +83,18 @@ export default {
         }
     },
 
+
     /**
      * Touch start event listener method
      *
      * @param event
      */
-    touchstartListener(event) {
+    touchstartListener: function touchstartListener(event) {
         /* Chrome on Android calls mouseover before touchcancel so `lastTouchTimestamp`
          * must be assigned on touchstart to be measured on mouseover. */
         this.lastTouchTimestamp = performance.now();
 
-        const linkElement = event.target.closest('a');
+        var linkElement = event.target.closest('a');
 
         if (!this.isPreloadable(linkElement)) {
             return;
@@ -97,30 +105,34 @@ export default {
 
         this.urlToPreload = linkElement.href;
 
-        this.preload(linkElement.href)
+        this.preload(linkElement.href);
     },
+
 
     /**
      * Stop preloading when touch ends or is cancelled
      */
-    touchendAndTouchcancelListener() {
+    touchendAndTouchcancelListener: function touchendAndTouchcancelListener() {
         this.urlToPreload = undefined;
 
         this.stopPreloading();
     },
+
 
     /**
      * Start measuring the mouseover on an element's a tag.
      *
      * @param event
      */
-    mouseoverListener(event) {
+    mouseoverListener: function mouseoverListener(event) {
+        var _this = this;
+
         // Not sure what this does though
         if (performance.now() - this.lastTouchTimestamp < 1100) {
             return;
         }
 
-        const linkElement = event.target.closest('a');
+        var linkElement = event.target.closest('a');
 
         if (!this.isPreloadable(linkElement)) {
             return;
@@ -130,20 +142,21 @@ export default {
 
         this.urlToPreload = linkElement.href;
 
-        this.mouseoverTimer = setTimeout(() => {
-            this.preload(linkElement.href);
+        this.mouseoverTimer = setTimeout(function () {
+            _this.preload(linkElement.href);
 
-            this.mouseoverTimer = undefined;
+            _this.mouseoverTimer = undefined;
         }, this.finalOptions.delayOnHover);
     },
+
 
     /**
      * Mouse down event is trigger, so start preloading the element's a tag.
      *
      * @param event
      */
-    mousedownListener(event) {
-        const linkElement = event.target.closest('a');
+    mousedownListener: function mousedownListener(event) {
+        var linkElement = event.target.closest('a');
 
         if (!this.isPreloadable(linkElement)) {
             return;
@@ -156,12 +169,13 @@ export default {
         this.preload(linkElement.href);
     },
 
+
     /**
      * The mouse over event is being cancelled, stop preloading at once.
      *
      * @param event
      */
-     mouseoutListener(event) {
+    mouseoutListener: function mouseoutListener(event) {
         if (event.relatedTarget && event.target.closest('a') === event.relatedTarget.closest('a')) {
             return;
         }
@@ -177,13 +191,14 @@ export default {
         this.stopPreloading();
     },
 
+
     /**
      * Check if the given link element is up for preloading
      *
      * @param linkElement
      * @returns {boolean}
      */
-    isPreloadable(linkElement) {
+    isPreloadable: function isPreloadable(linkElement) {
         // No element with href is found to preload
         if (!linkElement || !linkElement.href) {
             return false;
@@ -232,17 +247,20 @@ export default {
         return true;
     },
 
+
     /**
      * Start the preloading by adding the href attribute to the prefetch node
      */
-    preload(url) {
+    preload: function preload(url) {
         prefetcher.href = url;
     },
+
 
     /**
      * Stop the preloading by removing the href attribute from the prefetch node
      */
-    stopPreloading() {
+    stopPreloading: function stopPreloading() {
         prefetcher.removeAttribute('href');
     }
-}
+};
+//# sourceMappingURL=VueInstantPage.js.map

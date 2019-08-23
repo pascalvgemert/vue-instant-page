@@ -1,16 +1,16 @@
 {
   "name": "vue-instant-page",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Make your site’s pages instant with this Vue Plugin and improve your conversion rate.",
   "author": "Pascal van Gemert <pascal@pascalvangemert.nl>",
   "private": false,
   "main": "src/vue-instant-page.js",
   "license": "MIT",
   "scripts": {
-      "compile": "babel --source-maps -d lib/ src/",
-      "minify": "uglifyjs lib/kalman.js --compress --preamble '//kalmanjs, LGPL-3.0, https://github.com/wouterbulten/kalmanjs' --source-map lib/kalman.min.js.map --in-source-map lib/kalman.js.map --mangle -o lib/kalman.min.js",
-      "prepublish": "npm run compile && npm run minify"
-    },
+    "compile": "babel --source-maps -d dist/ src/",
+    "minify": "minify src/VueInstantPage.js > dist/VueInstantPage.min.js",
+    "prepublish": "npm run compile && npm run minify"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/pascalvgemert/vue-instant-page.git"
@@ -18,7 +18,8 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "minify": "^4.1.3",
     "vue": "^2.0.0"
   }
 }
